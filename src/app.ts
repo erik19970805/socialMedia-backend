@@ -2,10 +2,12 @@ import cookieParser from 'cookie-parser';
 import express, { Application } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import { config } from 'dotenv';
 
 // Routes
 
 // Initializations
+config();
 const app: Application = express();
 
 // Settings

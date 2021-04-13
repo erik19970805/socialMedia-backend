@@ -1,11 +1,21 @@
-import { connect } from 'mongoose';
+import { connect, connection, ConnectionOptions } from 'mongoose';
 import { db } from './config/config';
 
-connect(db, {
+const dbOptions: ConnectionOptions = {
   useNewUrlParser: true,
+  useCreateIndex: true,
   useUnifiedTopology: true,
-})
+};
+
+connect(db, dbOptions);
+
+connection.once('open', () => {
   // eslint-disable-next-line no-console
-  .then(() => console.log('connected to mongoDB'))
+  console.log('Mongodb Connection stablished');
+});
+
+connection.on('error', (err) => {
   // eslint-disable-next-line no-console
-  .catch((err) => console.log(err));
+  console.log('Mongodb connection error:', err);
+  process.exit();
+});

@@ -1,8 +1,5 @@
-import { config } from 'dotenv';
 import app from './app';
 import './database';
-
-config();
 
 function main() {
   app.listen(app.get('port'));
