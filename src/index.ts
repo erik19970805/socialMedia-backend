@@ -1,3 +1,7 @@
+/* eslint-disable import/first */
+import { config } from 'dotenv';
+
+config();
 import app from './app';
 import './database';
 

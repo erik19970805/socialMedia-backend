@@ -11,6 +11,8 @@
   },
   "plugins": ["@typescript-eslint"],
   "rules": {
+    "no-underscore-dangle": "off",
+    "func-names": "off",
     "import/extensions": [
       "error",
       "ignorePackages",

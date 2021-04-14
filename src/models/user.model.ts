@@ -1,4 +1,4 @@
-import { model, Schema, Types } from 'mongoose';
+import { LeanDocument, model, Schema, Types } from 'mongoose';
 import bcrypt from 'bcrypt';
 import { IUserModel } from '../interfaces/user.interface';
 
@@ -27,7 +27,6 @@ const userSchema: Schema<IUserModel> = new Schema(
   },
 );
 
-// eslint-disable-next-line func-names
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
   const salt = await bcrypt.genSalt(10);
@@ -36,10 +35,14 @@ userSchema.pre('save', async function (next) {
   return next();
 });
 
-// eslint-disable-next-line func-names
 userSchema.methods.matchPassword = async function (password: string): Promise<boolean> {
   const match = await bcrypt.compare(password, this.password);
   return match;
+};
+
+userSchema.methods.toJSON = function (): LeanDocument<IUserModel> {
+  const obj = this.toObject();
+  return { ...obj, password: '' };
 };
 
 export default model<IUserModel>('User', userSchema);
