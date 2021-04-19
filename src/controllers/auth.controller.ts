@@ -58,7 +58,7 @@ export const signin = async (req: Request, res: Response): Promise<Response> => 
       maxAge: 30 * 7 * 24 * 60 * 60 * 100,
     });
 
-    return res.json({ accessToken, user });
+    return res.json({ accessToken, user, message: 'Se inicio sesión correctamente' });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
