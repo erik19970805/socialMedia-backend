@@ -2,6 +2,7 @@ import cookieParser from 'cookie-parser';
 import express, { Application } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import { port, urlClient } from './config/config';
 
 // Routes
 import authRouters from './routers/auth.router';
@@ -10,11 +11,11 @@ import authRouters from './routers/auth.router';
 const app: Application = express();
 
 // Settings
-app.set('port', process.env.PORT || 4000);
+app.set('port', port);
 
 // Middlewares
 app.use(morgan('dev'));
-app.use(cors());
+app.use(cors({ credentials: true, origin: urlClient }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
