@@ -4,8 +4,9 @@ import morgan from 'morgan';
 import cors from 'cors';
 import { port, urlClient } from './config/config';
 
-// Routes
+// Import Routers
 import authRouters from './routers/auth.router';
+import userRouters from './routers/user.router';
 
 // Initializations
 const app: Application = express();
@@ -20,7 +21,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
 
-// Routes
+// Routers
 app.use('/api/auth', authRouters);
+app.use('/api/user', userRouters);
 
 export default app;
